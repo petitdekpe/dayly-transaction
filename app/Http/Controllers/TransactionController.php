@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Auth;
 
 class TransactionController extends Controller
 {
@@ -14,7 +15,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return response(Transaction::all());
+        return response(Transaction::query()->where("user_id", "=", Auth::user()->id)->get());
     }
 
     /**
